@@ -5,3 +5,5 @@ __pycache__/
 .ruff_cache/
 dist/
 build/
+# Local test archives hold real workspace messages
+archive/

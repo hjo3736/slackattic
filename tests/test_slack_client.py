@@ -111,7 +111,7 @@ def test_list_methods_pass_expected_params():
     assert list(client.iter_channels()) == [{"id": "C1"}]
     assert list(client.iter_users()) == [{"id": "U1"}]
     assert web.calls[0][1]["types"] == "public_channel,private_channel"
-    assert web.calls[0][1]["exclude_archived"] is True
+    assert web.calls[0][1]["exclude_archived"] is False
 
 
 @pytest.mark.parametrize("code", ["invalid_auth", "token_revoked", "not_authed"])

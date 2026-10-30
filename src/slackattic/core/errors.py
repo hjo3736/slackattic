@@ -15,3 +15,7 @@ class SlackatticError(Exception):
 
 class ConfigError(SlackatticError):
     pass
+
+
+class StorageError(SlackatticError):
+    pass

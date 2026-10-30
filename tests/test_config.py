@@ -93,3 +93,51 @@ def test_strips_token_whitespace():
 
 def test_repr_hides_token():
     assert TOKEN not in repr(load_config(env=ENV))
+
+
+def test_field_defaults():
+    config = load_config(env=ENV)
+    assert config.channel_fields == ("topic", "purpose", "created")
+    assert config.user_fields == ("real_name", "display_name", "avatar")
+
+
+def test_custom_fields_keep_order_and_drop_duplicates():
+    write(
+        Path("slackattic.toml"),
+        '[fields]\nusers = ["tz", "real_name", "tz"]\nchannels = []\n',
+    )
+    config = load_config(env=ENV)
+    assert config.user_fields == ("tz", "real_name")
+    assert config.channel_fields == ()
+
+
+def test_unset_group_keeps_default():
+    write(Path("slackattic.toml"), '[fields]\nusers = ["title"]\n')
+    assert load_config(env=ENV).channel_fields == ("topic", "purpose", "created")
+
+
+def test_rejects_required_field():
+    write(Path("slackattic.toml"), '[fields]\nusers = ["id"]\n')
+    with pytest.raises(ConfigError, match="always saved"):
+        load_config(env=ENV)
+
+
+def test_rejects_unknown_field_with_choices():
+    write(Path("slackattic.toml"), '[fields]\nusers = ["realname"]\n')
+    with pytest.raises(ConfigError, match="realname.*real_name"):
+        load_config(env=ENV)
+
+
+@pytest.mark.parametrize(
+    ("text", "match"),
+    [
+        ('fields = "x"\n', "must be a table"),
+        ("[fields]\nmessages = []\n", r"unknown \[fields\] key"),
+        ('[fields]\nusers = "real_name"\n', "must be a list"),
+        ("[fields]\nusers = [1]\n", "must be a list"),
+    ],
+)
+def test_rejects_bad_fields_shape(text, match):
+    write(Path("slackattic.toml"), text)
+    with pytest.raises(ConfigError, match=match):
+        load_config(env=ENV)

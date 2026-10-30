@@ -104,7 +104,8 @@ class SlackClient:
             "conversations.list",
             "channels",
             types="public_channel,private_channel",
-            exclude_archived=True,
+            # Archived channels stay listed so their stored messages keep a name
+            exclude_archived=False,
         )
 
     def iter_users(self) -> Iterator[dict[str, Any]]:

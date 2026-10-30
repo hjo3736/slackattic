@@ -22,6 +22,14 @@ class FakeSlackClient:
             raise self.error
         return {"team": "Test", "url": "https://test.slack.com/", "user": "slackattic"}
 
+    def iter_channels(self):
+        if self.error:
+            raise self.error
+        yield {"id": "C1", "name": "공개-채널", "is_member": True, "is_archived": False}
+
+    def iter_users(self):
+        yield {"id": "U1", "name": "u", "profile": {}}
+
 
 @pytest.fixture(autouse=True)
 def _isolated(tmp_path, monkeypatch):
@@ -44,10 +52,35 @@ def test_version():
     assert result.output.startswith("slackattic ")
 
 
-@pytest.mark.parametrize("name", ["sync", "import", "build", "serve"])
+@pytest.mark.parametrize("name", ["import", "build", "serve"])
 def test_stub_commands_exit_not_implemented(name):
     result = runner.invoke(app, [name])
     assert result.exit_code == ExitCode.NOT_IMPLEMENTED
+
+
+def test_sync_writes_metadata_then_reports_unchanged(tmp_path):
+    first = runner.invoke(app, ["sync"])
+    assert first.exit_code == 0
+    assert "channels.json: updated" in first.output
+    assert "channels to collect: 1" in first.output
+    assert (tmp_path / "archive" / "users.json").exists()
+    second = runner.invoke(app, ["sync"])
+    assert "channels.json: unchanged" in second.output
+    assert "users.json: unchanged" in second.output
+
+
+def test_sync_warns_about_missing_configured_channel(tmp_path):
+    (tmp_path / "slackattic.toml").write_text('channels = ["C9"]\n', encoding="utf-8")
+    result = runner.invoke(app, ["sync"])
+    assert result.exit_code == 0
+    assert "warning: channel C9" in result.output
+
+
+def test_sync_reports_slack_error():
+    FakeSlackClient.error = SlackAuthError("conversations.list: invalid_auth", "invalid_auth")
+    result = runner.invoke(app, ["sync"])
+    assert result.exit_code == ExitCode.ERROR
+    assert "invalid_auth" in result.output
 
 
 def test_doctor_ok_without_leaking_token():

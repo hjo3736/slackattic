@@ -8,6 +8,7 @@ from slackattic import __version__
 from slackattic.core.config import BOT_TOKEN_PREFIX, load_config
 from slackattic.core.errors import ExitCode, SlackatticError
 from slackattic.slack.client import SlackClient
+from slackattic.sync.metadata import sync_metadata
 
 app = typer.Typer(
     help="Daily archive and searchable viewer for free Slack workspaces.",
@@ -50,9 +51,25 @@ def _not_implemented(name: str) -> None:
 
 
 @app.command()
-def sync() -> None:
+def sync(ctx: typer.Context) -> None:
     """Fetch new messages into the archive."""
-    _not_implemented("sync")
+    try:
+        config = load_config(ctx.obj)
+        result = sync_metadata(SlackClient(config.token), config)
+    except SlackatticError as e:
+        raise _fail(e) from None
+    for name, changed in (
+        ("channels.json", result.channels_changed),
+        ("users.json", result.users_changed),
+    ):
+        typer.echo(f"{name}: {'updated' if changed else 'unchanged'}")
+    for cid in result.missing:
+        typer.echo(
+            f"warning: channel {cid} is unknown, archived or the bot is not a member", err=True
+        )
+    typer.echo(f"channels to collect: {len(result.selected)}")
+    # Message collection lands in WBS step 5
+    typer.echo("message sync is not implemented yet")
 
 
 @app.command("import")
