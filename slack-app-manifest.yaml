@@ -1,0 +1,26 @@
+display_information:
+  name: slackattic
+  description: Daily archive of the channels this bot is invited to.
+  background_color: "#3b4252"
+features:
+  bot_user:
+    display_name: slackattic
+    always_online: false
+oauth_config:
+  scopes:
+    bot:
+      # Read-only scopes; no write access to messages
+      - channels:read
+      - groups:read
+      - channels:history
+      - groups:history
+      - users:read
+      # Lets the bot join public channels without a manual invite
+      - channels:join
+      # Custom emoji names for the viewer
+      - emoji:read
+settings:
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  # Keep a non-expiring bot token for unattended runs
+  token_rotation_enabled: false
