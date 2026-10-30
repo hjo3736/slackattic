@@ -110,7 +110,7 @@ Python과 GitHub Actions만으로 서버나 DB 없이 무료로 돌아가게 구
 | 저장 | 월별 JSONL 파일 + git (private 저장소) | 서버·DB 없이 무료, 변경 이력이 자동으로 남음 |
 | 자동 실행 | GitHub Actions cron | 무료, 사용자는 토큰만 Secret에 등록 |
 | 뷰어 생성 | Jinja2로 정적 HTML 생성 | 구조가 단순하고 어디서나 열림 |
-| 검색 | Pagefind + 한국어 bigram 보조 색인 | 정적 사이트용 전문 검색, 서버 불필요, 필요한 색인 조각만 내려받음, Python에서 색인 생성. 1주차 검증에서 보조 색인으로 한국어 재현율 35/46 → 46/46 ([검증 결과](pagefind-korean-check.md), [선택 근거](search-library-decision.md)) |
+| 검색 | Pagefind + 한국어 bigram 보조 색인 | 정적 사이트용 전문 검색, 서버 불필요, 필요한 색인 조각만 내려받음, Python에서 색인 생성. 1주차 검증에서 보조 색인으로 한국어 재현율 78% → 100% (어려운 케이스 79개), 48% → 100% (생성 메시지 5,000개) ([검증 결과](pagefind-korean-check.md), [선택 근거](search-library-decision.md)) |
 | CLI·패키징 | Typer + uv | `sync`, `import`, `build`, `serve`, `doctor` 명령 구성 |
 | 테스트 | pytest + 녹화한 API 응답 | 실제 Slack 없이 동일한 결과로 재현 |
 
