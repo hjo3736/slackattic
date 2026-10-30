@@ -1,18 +1,34 @@
 import pytest
 from typer.testing import CliRunner
 
+from slackattic.cli import app as app_module
 from slackattic.cli.app import app
 from slackattic.core.config import TOKEN_ENV
 from slackattic.core.errors import ExitCode
+from slackattic.slack.errors import SlackAuthError
 
 TOKEN = "xoxb-secret-value"
 runner = CliRunner()
+
+
+class FakeSlackClient:
+    error: Exception | None = None
+
+    def __init__(self, token: str) -> None:
+        self.token = token
+
+    def auth_test(self) -> dict[str, str]:
+        if self.error:
+            raise self.error
+        return {"team": "Test", "url": "https://test.slack.com/", "user": "slackattic"}
 
 
 @pytest.fixture(autouse=True)
 def _isolated(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     monkeypatch.setenv(TOKEN_ENV, TOKEN)
+    FakeSlackClient.error = None
+    monkeypatch.setattr(app_module, "SlackClient", FakeSlackClient)
 
 
 def test_help_lists_commands():
@@ -38,7 +54,17 @@ def test_doctor_ok_without_leaking_token():
     result = runner.invoke(app, ["doctor"])
     assert result.exit_code == 0
     assert "config OK" in result.output
+    assert "slack OK" in result.output
+    assert "Test" in result.output
     assert TOKEN not in result.output
+
+
+def test_doctor_reports_slack_auth_error():
+    FakeSlackClient.error = SlackAuthError("auth.test: invalid_auth", "invalid_auth")
+    result = runner.invoke(app, ["doctor"])
+    assert result.exit_code == ExitCode.ERROR
+    assert "invalid_auth" in result.output
+    assert "slack OK" not in result.output
 
 
 def test_doctor_reports_missing_token(monkeypatch):

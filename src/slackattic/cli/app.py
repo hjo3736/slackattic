@@ -7,6 +7,7 @@ import typer
 from slackattic import __version__
 from slackattic.core.config import BOT_TOKEN_PREFIX, load_config
 from slackattic.core.errors import ExitCode, SlackatticError
+from slackattic.slack.client import SlackClient
 
 app = typer.Typer(
     help="Daily archive and searchable viewer for free Slack workspaces.",
@@ -74,15 +75,19 @@ def serve() -> None:
 
 @app.command()
 def doctor(ctx: typer.Context) -> None:
-    """Check the configuration."""
+    """Check the configuration and the Slack connection."""
     try:
         config = load_config(ctx.obj)
+        typer.echo(f"token:       {BOT_TOKEN_PREFIX}**** (set)")
+        typer.echo(f"archive_dir: {config.archive_dir}")
+        typer.echo(f"channels:    {', '.join(config.channels) or 'all joined channels'}")
+        typer.echo("config OK")
+        auth = SlackClient(config.token).auth_test()
     except SlackatticError as e:
         raise _fail(e) from None
-    typer.echo(f"token:       {BOT_TOKEN_PREFIX}**** (set)")
-    typer.echo(f"archive_dir: {config.archive_dir}")
-    typer.echo(f"channels:    {', '.join(config.channels) or 'all joined channels'}")
-    typer.echo("config OK")
+    typer.echo(f"workspace:   {auth.get('team')} ({auth.get('url')})")
+    typer.echo(f"bot user:    {auth.get('user')}")
+    typer.echo("slack OK")
 
 
 def main() -> None:
