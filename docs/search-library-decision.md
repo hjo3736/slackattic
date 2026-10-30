@@ -1,0 +1,80 @@
+# 검색 라이브러리 선택 근거
+
+작성일: 2026-10-30
+결정: **Pagefind + 한국어 bigram 보조 색인 (d 방식)** (제안 상태, 3주차 뷰어 작업에서 확정)
+
+관련 문서: [Pagefind 한국어 검색 검증 결과](pagefind-korean-check.md)
+
+## 1. 요구 조건
+
+slackattic 뷰어의 검색은 아래 조건을 만족해야 합니다.
+
+1. **서버 없이 동작**: 사용자 PC에서 정적 HTML로 열거나, 아무 정적 호스팅에 올려도 검색이 되어야 합니다.
+2. **큰 아카이브에서도 첫 검색이 빠름**: 소규모 커뮤니티라도 몇 년 쌓이면 수만~수십만 건이 됩니다.
+3. **한국어 검색 품질**: 조사가 붙은 말, 붙여 쓴 합성어, 띄어쓰기 차이를 찾아야 합니다.
+4. **Python에서 색인 생성**: 수집기가 Python이고, GitHub Actions에서 Node 없이 돌리는 것이 설치 장벽을 낮춥니다.
+5. **유지보수되는 프로젝트**: 몇 년 뒤에도 쓸 수 있어야 합니다.
+
+## 2. 후보 비교
+
+버전과 날짜는 2026-10-30 기준 npm 레지스트리와 GitHub에서 확인했습니다. "확인 못 함"은 1차 자료로 확인하지 못한 내용입니다.
+
+| 라이브러리 | 색인을 받는 방식 | Python에서 색인 생성 | 부분 일치 | 한국어 | 상태 |
+| --- | --- | --- | --- | --- | --- |
+| **Pagefind** | **필요한 조각만 내려받음.** 1만 페이지 사이트도 검색에 300 kB 미만 전송 (공식 문서) | **가능** (`pagefind[extended]`, PyPI) | 단어 앞부분만 | extended 빌드에서 분절, 1.5부터 검색어도 분절. 한국어 어간 처리 없음 | 1.5.2 (2026-04), MIT, 활발 |
+| FlexSearch | 전체 색인을 메모리에 올림. 나누려면 직접 분할 | 불가 (Node 필요) | `full` 모드로 모든 부분 문자열 (메모리 비용 큼) | CJK 문자셋 프리셋, 한국어 전용 처리 없음 | 0.8.212 (2025-09), Apache-2.0, 릴리스 불규칙 |
+| MiniSearch | 전체 색인을 메모리에 올림 | 불가 (Node 필요) | 앞부분·오타 허용, 부분 일치 없음 | 없음 (토크나이저 직접 작성) | 7.2.0 (2025-09), MIT, 유지보수 중 |
+| Lunr.js | 전체 색인을 메모리에 올림 | 불가 | 와일드카드, 오타 허용 | `lunr.ko.js`는 공백 분리만 하고 조사 분리 없음 | 본체 2.3.9 (2020-08)에서 **사실상 중단** |
+| Fuse.js | 색인 없이 매 검색마다 전체 목록을 훑음 | 불가 | 퍼지·부분 일치 | 전용 처리 없음 (음절 단위로는 동작) | 7.5.0 (2026-07), Apache-2.0, 활발 |
+| Orama | 메모리 DB, 저장 시 전체 직렬화 (확인 못 함) | 불가 | 오타 허용, BM25 | **한국어 미지원** (지원 언어 목록에 없음) | 3.1.18 (2025-12), 회사가 호스팅 제품에 집중 |
+| Stork | 색인 파일 전체를 받아 WASM으로 로드 | 불가 (Rust CLI) | 앞부분 | CJK 지원 없음 (확인 못 함) | **개발 중단** (2023-06 메인테이너 공지, Pagefind 추천) |
+| Meilisearch | 서버 필요 | - | 오타 허용, 앞부분 | 형태소 분석(lindera KO 사전) | 서버형이라 조건 1 불충족 |
+| Typesense | 서버 필요 | - | 오타 허용 | ICU `ko` 로캘 | 서버형이라 조건 1 불충족 |
+
+## 3. 후보별 판단
+
+- **Meilisearch, Typesense**: 한국어 품질은 가장 좋지만 서버가 있어야 합니다. "정적 뷰어"라는 조건과 맞지 않아 제외합니다. 나중에 고급 사용자용 선택 기능으로는 고려할 수 있습니다.
+- **Stork, Lunr.js**: 개발이 멈췄습니다. Lunr의 한국어 플러그인은 공백 분리만 해서 "회의를"과 "회의"를 이어 주지 못합니다.
+- **Orama**: 지원 언어에 한국어가 없습니다.
+- **Fuse.js**: 색인 없이 매번 전체를 훑습니다. 채널 이름이나 사용자 이름처럼 작은 목록에는 맞지만, 메시지 본문 수만 건에는 맞지 않습니다.
+- **MiniSearch, FlexSearch**: bigram 토크나이저를 직접 넣으면 한국어 부분 일치가 됩니다. 하지만 **전체 색인을 한 번에 내려받아야** 합니다. 메시지 10만 건이면 첫 검색 전에 수 MB에서 수십 MB를 받아야 할 수 있습니다(추정, 확인 못 함). 색인 생성에 Node가 필요해서 Python만으로 돌리는 구성도 깨집니다.
+- **Pagefind**: 필요한 조각만 받는 유일한 후보입니다. Python에서 바로 색인을 만들 수 있고, 채널·사용자·날짜 필터와 결과 미리보기를 기본으로 제공합니다. 약점은 단어 앞부분 일치만 된다는 점입니다.
+
+## 4. 결정: Pagefind + bigram 보조 색인
+
+Pagefind의 약점(부분 일치 불가)을 MiniSearch·FlexSearch가 쓰는 것과 같은 방법인 **2글자 조각(bigram)**으로 메웠습니다. 차이는 그 조각을 Pagefind의 조각 단위 색인 안에 넣어서, **큰 아카이브에서도 필요한 부분만 받는 장점을 그대로 유지**한다는 점입니다.
+
+실제 브라우저에서 같은 조건으로 측정한 결과입니다. 자세한 표는 [검증 결과](pagefind-korean-check.md)에 있습니다.
+
+| 방식 | 재현율 | 기대 밖 결과 |
+| --- | --- | --- |
+| Pagefind 그대로 | 35/46 | 4 |
+| **Pagefind + d 방식** | **46/46** | 2 (띄어 쓴 "주 회의"처럼 사실상 맞는 결과) |
+
+d 방식은 다음 세 가지로 이뤄집니다.
+
+1. 문서의 한글 단어를 2글자 조각으로 나눠 낮은 가중치로 함께 색인
+2. 이웃한 두 한글 단어를 붙인 형태의 2글자 조각도 색인 (띄어쓰기 차이 대응)
+3. 검색할 때 3글자 이상 한글 검색어를 2글자 조각으로 나눠 모두 일치하는 결과만 표시
+
+## 5. 남은 위험과 확인할 것
+
+| 위험 | 확인·대응 시점 |
+| --- | --- |
+| 실제 규모(수만 건)에서 색인 크기·검색 속도 | 3주차 뷰어 작업 때 측정 |
+| 조각 텍스트가 결과 미리보기에 보임 | 미리보기는 메시지 원문(meta)으로 표시 |
+| 조각 때문에 결과 순위가 흐트러짐 | 낮은 가중치 적용, 3주차에 실제 데이터로 확인 |
+| Pagefind 개발 중단 | 색인 생성과 검색어 처리를 한 모듈에 모아, 필요하면 MiniSearch 등으로 교체 가능하게 설계 |
+
+## 출처
+
+- Pagefind: https://pagefind.app/docs/ , https://pagefind.app/docs/multilingual/ , https://pagefind.app/docs/py-api/ , https://github.com/Pagefind/pagefind/releases
+- FlexSearch: https://github.com/nextapps-de/flexsearch
+- MiniSearch: https://github.com/lucaong/minisearch
+- Lunr.js: https://github.com/olivernn/lunr.js , https://github.com/MihaiValentin/lunr-languages
+- Fuse.js: https://www.fusejs.io/
+- Orama: https://github.com/oramasearch/orama , https://docs.orama.com/docs/orama-js/supported-languages
+- Stork: https://github.com/jameslittle230/stork/discussions/360
+- Meilisearch: https://www.meilisearch.com/docs/learn/resources/language
+- Typesense: https://typesense.org/docs/guide/locale.html
+- 버전과 날짜: npm 레지스트리 (`npm view <패키지> time`)
