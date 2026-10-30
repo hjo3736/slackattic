@@ -30,6 +30,9 @@ class FakeSlackClient:
     def iter_users(self):
         yield {"id": "U1", "name": "u", "profile": {}}
 
+    def iter_history(self, channel, oldest=None):
+        yield {"type": "message", "ts": "1793344750.472099", "text": "회의록"}
+
 
 @pytest.fixture(autouse=True)
 def _isolated(tmp_path, monkeypatch):
@@ -62,11 +65,13 @@ def test_sync_writes_metadata_then_reports_unchanged(tmp_path):
     first = runner.invoke(app, ["sync"])
     assert first.exit_code == 0
     assert "channels.json: updated" in first.output
-    assert "channels to collect: 1" in first.output
+    assert "#공개-채널 (C1): fetched 1, new 1, updated 0" in first.output
     assert (tmp_path / "archive" / "users.json").exists()
+    assert (tmp_path / "archive" / "messages" / "C1" / "2026-10.jsonl").exists()
     second = runner.invoke(app, ["sync"])
     assert "channels.json: unchanged" in second.output
     assert "users.json: unchanged" in second.output
+    assert "fetched 1, new 0, updated 0" in second.output
 
 
 def test_sync_warns_about_missing_configured_channel(tmp_path):

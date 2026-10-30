@@ -34,8 +34,11 @@ def read_json(path: Path, default: Any) -> Any:
 
 
 def write_json_if_changed(path: Path, data: Any) -> bool:
+    return write_text_if_changed(path, dump_json(data))
+
+
+def write_text_if_changed(path: Path, text: str) -> bool:
     """Write atomically and skip the write when the content is the same."""
-    text = dump_json(data)
     if path.exists() and read_text_or_none(path) == text:
         return False
     ensure_dir(path.parent)

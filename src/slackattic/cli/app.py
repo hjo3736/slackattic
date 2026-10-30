@@ -8,6 +8,7 @@ from slackattic import __version__
 from slackattic.core.config import BOT_TOKEN_PREFIX, load_config
 from slackattic.core.errors import ExitCode, SlackatticError
 from slackattic.slack.client import SlackClient
+from slackattic.sync.messages import sync_messages
 from slackattic.sync.metadata import sync_metadata
 
 app = typer.Typer(
@@ -55,21 +56,33 @@ def sync(ctx: typer.Context) -> None:
     """Fetch new messages into the archive."""
     try:
         config = load_config(ctx.obj)
-        result = sync_metadata(SlackClient(config.token), config)
+        client = SlackClient(config.token)
+        meta = sync_metadata(client, config)
     except SlackatticError as e:
         raise _fail(e) from None
     for name, changed in (
-        ("channels.json", result.channels_changed),
-        ("users.json", result.users_changed),
+        ("channels.json", meta.channels_changed),
+        ("users.json", meta.users_changed),
     ):
         typer.echo(f"{name}: {'updated' if changed else 'unchanged'}")
-    for cid in result.missing:
+    for cid in meta.missing:
         typer.echo(
             f"warning: channel {cid} is unknown, archived or the bot is not a member", err=True
         )
-    typer.echo(f"channels to collect: {len(result.selected)}")
-    # Message collection lands in WBS step 5
-    typer.echo("message sync is not implemented yet")
+
+    names = {c["id"]: c["name"] for c in meta.selected}
+    try:
+        result = sync_messages(client, config.archive_dir, list(names))
+    except SlackatticError as e:
+        # Channels finished before the failure keep their saved progress
+        raise _fail(e) from None
+    for ch in result.channels:
+        typer.echo(
+            f"#{names[ch.channel_id]} ({ch.channel_id}): "
+            f"fetched {ch.fetched}, new {ch.added}, updated {ch.updated}"
+        )
+    for skipped in result.skipped:
+        typer.echo(f"warning: skipped channel {skipped.channel}: {skipped}", err=True)
 
 
 @app.command("import")
