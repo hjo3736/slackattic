@@ -1,4 +1,4 @@
-# Pagefind 한국어 검색 검증 결과 (WBS 6)
+# Pagefind 한국어 검색 검증 결과
 
 검증일: 2026-10-30
 환경: Pagefind 1.5.2 extended, Chromium (Playwright 1.64.1 headless), Windows 11
