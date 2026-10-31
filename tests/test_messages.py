@@ -268,3 +268,97 @@ def test_long_gap_between_runs_starts_from_lookback_not_window(tmp_path):
 def test_rescan_days_must_be_positive(tmp_path):
     with pytest.raises(ValueError):
         sync_messages(FakeHistory({}), tmp_path, [], rescan_days=0)
+
+
+NOW = float(NOV) + DAY  # The 90-day window then covers both OCT and NOV
+DELETED = "slackattic_deleted"
+
+
+def deleted_marks(archive: Path) -> dict[str, str]:
+    return {
+        m["ts"]: m[DELETED]
+        for rows in files_of(archive, "C1").values()
+        for m in rows
+        if DELETED in m
+    }
+
+
+def test_message_missing_inside_window_is_marked_once(tmp_path):
+    sync_messages(FakeHistory({"C1": [msg(OCT), msg(NOV)]}), tmp_path, ["C1"])
+    source = FakeHistory({"C1": [msg(NOV)]})
+    result = sync_messages(source, tmp_path, ["C1"], now=NOW).channels[0]
+    assert result.deleted == 1
+    assert deleted_marks(tmp_path) == {OCT: "2026-11-02T02:26:40Z"}
+    snapshot = {p: p.read_bytes() for p in tmp_path.rglob("*") if p.is_file()}
+    again = sync_messages(source, tmp_path, ["C1"], now=NOW + 3600).channels[0]
+    assert again.deleted == 0
+    assert {p: p.read_bytes() for p in tmp_path.rglob("*") if p.is_file()} == snapshot
+
+
+def test_message_that_comes_back_loses_the_mark(tmp_path):
+    sync_messages(FakeHistory({"C1": [msg(OCT), msg(NOV)]}), tmp_path, ["C1"])
+    sync_messages(FakeHistory({"C1": [msg(NOV)]}), tmp_path, ["C1"], now=NOW)
+    result = sync_messages(
+        FakeHistory({"C1": [msg(OCT), msg(NOV)]}), tmp_path, ["C1"], now=NOW
+    ).channels[0]
+    assert (result.updated, result.deleted) == (1, 0)
+    assert deleted_marks(tmp_path) == {}
+
+
+def test_message_before_window_start_is_not_marked(tmp_path):
+    sync_messages(FakeHistory({"C1": [msg(OCT), msg(NOV)]}), tmp_path, ["C1"])
+    # A 1-day window starts after OCT, so its absence means nothing
+    sync_messages(FakeHistory({"C1": [msg(NOV)]}), tmp_path, ["C1"], rescan_days=1, now=NOW)
+    assert deleted_marks(tmp_path) == {}
+
+
+def test_replies_are_not_marked_just_because_history_omits_them(tmp_path):
+    threads = {("C1", OCT): [reply(R1)]}
+    sync_messages(FakeHistory({"C1": [root(OCT, R1)]}, threads), tmp_path, ["C1"])
+    sync_messages(FakeHistory({"C1": [root(OCT, R1)]}, threads), tmp_path, ["C1"], now=NOW)
+    assert deleted_marks(tmp_path) == {}
+
+
+def test_deleted_reply_is_found_when_reply_count_drops(tmp_path):
+    first = FakeHistory(
+        {"C1": [root(OCT, R2, reply_count=2)]}, {("C1", OCT): [reply(R1), reply(R2)]}
+    )
+    sync_messages(first, tmp_path, ["C1"])
+    # R1 was deleted; latest_reply stays R2 so only the lower count reveals it
+    source = FakeHistory({"C1": [root(OCT, R2, reply_count=1)]}, {("C1", OCT): [reply(R2)]})
+    result = sync_messages(source, tmp_path, ["C1"], now=NOW).channels[0]
+    assert source.reply_calls == [("C1", OCT)]
+    assert result.deleted == 1
+    assert list(deleted_marks(tmp_path)) == [R1]
+
+
+def test_all_replies_deleted_marks_them_without_fetching(tmp_path):
+    sync_messages(
+        FakeHistory({"C1": [root(OCT, R1)]}, {("C1", OCT): [reply(R1)]}), tmp_path, ["C1"]
+    )
+    source = FakeHistory({"C1": [msg(OCT, "root")]})
+    result = sync_messages(source, tmp_path, ["C1"], now=NOW).channels[0]
+    assert source.reply_calls == []
+    assert result.deleted == 1
+    assert list(deleted_marks(tmp_path)) == [R1]
+    assert load_state(tmp_path / "state.json").channels["C1"].threads == {}
+
+
+def test_failed_thread_does_not_mark_its_replies(tmp_path):
+    first = FakeHistory(
+        {"C1": [root(OCT, R2, reply_count=2)]}, {("C1", OCT): [reply(R1), reply(R2)]}
+    )
+    sync_messages(first, tmp_path, ["C1"])
+    error = SlackThreadError("thread_not_found", "thread_not_found", "C1", OCT)
+    source = FakeHistory({"C1": [root(OCT, R2, reply_count=1)]}, {("C1", OCT): error})
+    result = sync_messages(source, tmp_path, ["C1"], now=NOW).channels[0]
+    assert result.deleted == 0
+    assert deleted_marks(tmp_path) == {}
+
+
+def test_deleted_thread_root_is_dropped_from_state(tmp_path):
+    threads = {("C1", OCT): [reply(R1)]}
+    sync_messages(FakeHistory({"C1": [root(OCT, R1), msg(NOV)]}, threads), tmp_path, ["C1"])
+    sync_messages(FakeHistory({"C1": [msg(NOV)]}), tmp_path, ["C1"], now=NOW)
+    assert OCT in deleted_marks(tmp_path)
+    assert load_state(tmp_path / "state.json").channels["C1"].threads == {}

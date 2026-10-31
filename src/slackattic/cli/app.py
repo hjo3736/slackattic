@@ -79,7 +79,8 @@ def sync(ctx: typer.Context) -> None:
     for ch in result.channels:
         typer.echo(
             f"#{names[ch.channel_id]} ({ch.channel_id}): "
-            f"fetched {ch.fetched}, new {ch.added}, updated {ch.updated}, threads {ch.threads}"
+            f"fetched {ch.fetched}, new {ch.added}, updated {ch.updated}, "
+            f"deleted {ch.deleted}, threads {ch.threads}"
         )
         for skipped in ch.skipped_threads:
             typer.echo(f"warning: skipped thread, will retry next run: {skipped}", err=True)
