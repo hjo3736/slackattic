@@ -1,3 +1,4 @@
+import json
 import re
 
 import pytest
@@ -16,7 +17,8 @@ def run_sync(archive):
     client = SlackClient("xoxb-test", web_client=web, page_size=web.page_size)
     config = Config(token="xoxb-test", archive_dir=archive)
     meta = sync_metadata(client, config)
-    result = sync_messages(client, archive, [c["id"] for c in meta.selected])
+    ids = [c["id"] for c in meta.selected]
+    result = sync_messages(client, archive, ids, web.rescan_days, web.now)
     return web, meta, result
 
 
@@ -51,3 +53,16 @@ def test_fixture_holds_only_fake_ids_and_no_tokens():
     assert "xox" not in text
     ids = set(re.findall(r"\b(?=[A-Z0-9]*\d)[ABCDEFGSTUW][A-Z0-9]{8,}\b", text))
     assert ids and all(FAKE_ID.match(i) for i in ids)
+
+
+def test_replayed_sync_stores_thread_replies(tmp_path):
+    web, _, result = run_sync(tmp_path)
+    assert sum(ch.threads for ch in result.channels) > 0
+    assert any(m == "conversations.replies" for m, _ in web.calls)
+    replies = [
+        m
+        for p in tmp_path.glob("messages/*/*.jsonl")
+        for m in map(json.loads, p.read_text(encoding="utf-8").splitlines())
+        if m.get("thread_ts") and m["thread_ts"] != m["ts"]
+    ]
+    assert replies

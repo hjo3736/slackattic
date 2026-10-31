@@ -72,15 +72,17 @@ def sync(ctx: typer.Context) -> None:
 
     names = {c["id"]: c["name"] for c in meta.selected}
     try:
-        result = sync_messages(client, config.archive_dir, list(names))
+        result = sync_messages(client, config.archive_dir, list(names), config.rescan_days)
     except SlackatticError as e:
         # Channels finished before the failure keep their saved progress
         raise _fail(e) from None
     for ch in result.channels:
         typer.echo(
             f"#{names[ch.channel_id]} ({ch.channel_id}): "
-            f"fetched {ch.fetched}, new {ch.added}, updated {ch.updated}"
+            f"fetched {ch.fetched}, new {ch.added}, updated {ch.updated}, threads {ch.threads}"
         )
+        for skipped in ch.skipped_threads:
+            typer.echo(f"warning: skipped thread, will retry next run: {skipped}", err=True)
     for skipped in result.skipped:
         typer.echo(f"warning: skipped channel {skipped.channel}: {skipped}", err=True)
 

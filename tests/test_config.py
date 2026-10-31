@@ -141,3 +141,21 @@ def test_rejects_bad_fields_shape(text, match):
     write(Path("slackattic.toml"), text)
     with pytest.raises(ConfigError, match=match):
         load_config(env=ENV)
+
+
+def test_rescan_days_defaults_to_90():
+    assert load_config(env=ENV).rescan_days == 90
+
+
+def test_reads_rescan_days(tmp_path):
+    path = tmp_path / "c.toml"
+    path.write_text("rescan_days = 14\n", encoding="utf-8")
+    assert load_config(path, env=ENV).rescan_days == 14
+
+
+@pytest.mark.parametrize("value", ["0", "-1", "true", '"30"', "1.5"])
+def test_rejects_bad_rescan_days(tmp_path, value):
+    path = tmp_path / "c.toml"
+    path.write_text(f"rescan_days = {value}\n", encoding="utf-8")
+    with pytest.raises(ConfigError, match="rescan_days"):
+        load_config(path, env=ENV)

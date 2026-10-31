@@ -33,6 +33,9 @@ class FakeSlackClient:
     def iter_history(self, channel, oldest=None):
         yield {"type": "message", "ts": "1793344750.472099", "text": "회의록"}
 
+    def iter_replies(self, channel, thread_ts):
+        yield from ()
+
 
 @pytest.fixture(autouse=True)
 def _isolated(tmp_path, monkeypatch):

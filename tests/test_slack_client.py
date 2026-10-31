@@ -19,6 +19,7 @@ from slackattic.slack.errors import (
     SlackAuthError,
     SlackChannelError,
     SlackError,
+    SlackThreadError,
     SlackTransientError,
 )
 
@@ -229,3 +230,16 @@ def test_real_client_gives_up_after_retry_limit(slack_server):
     with pytest.raises(SlackTransientError):
         real_client(slack_server).auth_test()
     assert slack_server.hits == 6
+
+
+def test_iter_replies_passes_thread_ts():
+    client, web = make(page([{"ts": "1.0"}, {"ts": "2.0"}]))
+    assert [m["ts"] for m in client.iter_replies("C1", "1.0")] == ["1.0", "2.0"]
+    assert web.calls[0] == ("conversations.replies", {"limit": 200, "channel": "C1", "ts": "1.0"})
+
+
+def test_thread_not_found_is_skippable_per_thread():
+    client, _ = make(api_error("thread_not_found"))
+    with pytest.raises(SlackThreadError) as info:
+        list(client.iter_replies("C1", "1.0"))
+    assert (info.value.channel, info.value.thread_ts) == ("C1", "1.0")

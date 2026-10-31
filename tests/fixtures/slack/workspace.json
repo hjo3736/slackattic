@@ -327,8 +327,8 @@
               }
             ],
             "is_locked": false,
-            "latest_reply": "1793344807.840199",
-            "reply_count": 3,
+            "latest_reply": "1793418752.574069",
+            "reply_count": 4,
             "reply_users": [
               "U0000000002"
             ],
@@ -367,7 +367,7 @@
         "channel": "C0000000002",
         "cursor": "cursor-7",
         "limit": 5,
-        "oldest": "1793258442.464519"
+        "oldest": "1785645655.000000"
       },
       "response": {
         "channel_actions_count": 0,
@@ -574,7 +574,7 @@
           }
         ],
         "ok": true,
-        "oldest": "1793258442.464519",
+        "oldest": "1785645655.000000",
         "pin_count": 0,
         "response_metadata": {
           "next_cursor": "cursor-8"
@@ -587,7 +587,7 @@
         "channel": "C0000000002",
         "cursor": "cursor-8",
         "limit": 5,
-        "oldest": "1793258442.464519"
+        "oldest": "1785645655.000000"
       },
       "response": {
         "channel_actions_count": 0,
@@ -723,7 +723,7 @@
           }
         ],
         "ok": true,
-        "oldest": "1793258442.464519",
+        "oldest": "1785645655.000000",
         "pin_count": 0
       }
     },
@@ -732,7 +732,7 @@
       "params": {
         "channel": "C0000000002",
         "limit": 5,
-        "oldest": "1793258442.464519"
+        "oldest": "1785645655.000000"
       },
       "response": {
         "channel_actions_count": 0,
@@ -894,8 +894,8 @@
               }
             ],
             "is_locked": false,
-            "latest_reply": "1793344807.840199",
-            "reply_count": 3,
+            "latest_reply": "1793418752.574069",
+            "reply_count": 4,
             "reply_users": [
               "U0000000002"
             ],
@@ -925,7 +925,7 @@
           }
         ],
         "ok": true,
-        "oldest": "1793258442.464519",
+        "oldest": "1785645655.000000",
         "pin_count": 0,
         "response_metadata": {
           "next_cursor": "cursor-7"
@@ -1273,7 +1273,7 @@
         "channel": "C0000000004",
         "cursor": "cursor-9",
         "limit": 5,
-        "oldest": "1793258460.543159"
+        "oldest": "1785645655.000000"
       },
       "response": {
         "channel_actions_count": 0,
@@ -1453,7 +1453,7 @@
           }
         ],
         "ok": true,
-        "oldest": "1793258460.543159",
+        "oldest": "1785645655.000000",
         "pin_count": 0
       }
     },
@@ -1462,7 +1462,7 @@
       "params": {
         "channel": "C0000000004",
         "limit": 5,
-        "oldest": "1793258460.543159"
+        "oldest": "1785645655.000000"
       },
       "response": {
         "channel_actions_count": 0,
@@ -1607,7 +1607,7 @@
           }
         ],
         "ok": true,
-        "oldest": "1793258460.543159",
+        "oldest": "1785645655.000000",
         "pin_count": 0,
         "response_metadata": {
           "next_cursor": "cursor-9"
@@ -1846,7 +1846,7 @@
         "channel": "C0000000006",
         "cursor": "cursor-10",
         "limit": 5,
-        "oldest": "1793258390.785599"
+        "oldest": "1785645655.000000"
       },
       "response": {
         "channel_actions_count": 0,
@@ -2085,7 +2085,7 @@
           }
         ],
         "ok": true,
-        "oldest": "1793258390.785599",
+        "oldest": "1785645655.000000",
         "pin_count": 0,
         "response_metadata": {
           "next_cursor": "cursor-11"
@@ -2098,7 +2098,7 @@
         "channel": "C0000000006",
         "cursor": "cursor-11",
         "limit": 5,
-        "oldest": "1793258390.785599"
+        "oldest": "1785645655.000000"
       },
       "response": {
         "channel_actions_count": 0,
@@ -2109,48 +2109,12 @@
             "app_id": "A0000000002",
             "blocks": [
               {
-                "block_id": "/+3Fg1",
+                "block_id": "lhkjI",
                 "elements": [
                   {
                     "elements": [
                       {
-                        "text": "이 메시지는 나중에 삭제할 예정입니다",
-                        "type": "text"
-                      }
-                    ],
-                    "type": "rich_text_section"
-                  }
-                ],
-                "type": "rich_text"
-              },
-              {
-                "block_id": "UOdv7",
-                "elements": [
-                  {
-                    "text": "*다음을 사용하여 보냄* Claude",
-                    "type": "mrkdwn",
-                    "verbatim": false
-                  }
-                ],
-                "type": "context"
-              }
-            ],
-            "team": "T0000000001",
-            "text": "이 메시지는 나중에 삭제할 예정입니다 *다음을 사용하여 보냄* Claude",
-            "ts": "1793344790.785599",
-            "type": "message",
-            "user": "U0000000002"
-          },
-          {
-            "app_id": "A0000000002",
-            "blocks": [
-              {
-                "block_id": "YnZSCG",
-                "elements": [
-                  {
-                    "elements": [
-                      {
-                        "text": "이 메시지는 나중에 수정할 예정입니다 (수정 전)",
+                        "text": "이 메시지는 수정되었습니다 (수정 후)",
                         "type": "text"
                       }
                     ],
@@ -2171,8 +2135,12 @@
                 "type": "context"
               }
             ],
+            "edited": {
+              "ts": "1793418845.000000",
+              "user": "U0000000002"
+            },
             "team": "T0000000001",
-            "text": "이 메시지는 나중에 수정할 예정입니다 (수정 전) *다음을 사용하여 보냄* Claude",
+            "text": "이 메시지는 수정되었습니다 (수정 후) *다음을 사용하여 보냄* Claude",
             "ts": "1793344789.748419",
             "type": "message",
             "user": "U0000000002"
@@ -2307,7 +2275,7 @@
           }
         ],
         "ok": true,
-        "oldest": "1793258390.785599",
+        "oldest": "1785645655.000000",
         "pin_count": 0
       }
     },
@@ -2323,66 +2291,6 @@
         "channel_actions_ts": null,
         "has_more": true,
         "messages": [
-          {
-            "app_id": "A0000000002",
-            "blocks": [
-              {
-                "block_id": "zfKeya",
-                "elements": [
-                  {
-                    "elements": [
-                      {
-                        "text": "여러 줄 메시지 테스트",
-                        "type": "text"
-                      },
-                      {
-                        "text": "\n",
-                        "type": "text"
-                      },
-                      {
-                        "text": "첫째 줄",
-                        "type": "text"
-                      },
-                      {
-                        "text": "\n",
-                        "type": "text"
-                      },
-                      {
-                        "text": "둘째 줄",
-                        "type": "text"
-                      },
-                      {
-                        "text": "\n",
-                        "type": "text"
-                      },
-                      {
-                        "text": "셋째 줄",
-                        "type": "text"
-                      }
-                    ],
-                    "type": "rich_text_section"
-                  }
-                ],
-                "type": "rich_text"
-              },
-              {
-                "block_id": "d+sqP",
-                "elements": [
-                  {
-                    "text": "*다음을 사용하여 보냄* Claude",
-                    "type": "mrkdwn",
-                    "verbatim": false
-                  }
-                ],
-                "type": "context"
-              }
-            ],
-            "team": "T0000000001",
-            "text": "여러 줄 메시지 테스트\n첫째 줄\n둘째 줄\n셋째 줄 *다음을 사용하여 보냄* Claude",
-            "ts": "1793344773.116469",
-            "type": "message",
-            "user": "U0000000002"
-          },
           {
             "app_id": "A0000000002",
             "blocks": [
@@ -2550,6 +2458,49 @@
             "team": "T0000000001",
             "text": "Slack 무료 플랜 정책은 여기 참고하세요 <https://slack.com/help/articles/27204752526611|slack.com/help/articles/27204752526611> *다음을 사용하여 보냄* Claude",
             "ts": "1793344769.228119",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "n8MnPm",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "프로젝트 저장소 링크 공유합니다 ",
+                        "type": "text"
+                      },
+                      {
+                        "from_llm": true,
+                        "text": "github.com/hjo3736/slackattic",
+                        "truncated": true,
+                        "type": "link",
+                        "url": "https://github.com/hjo3736/slackattic"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "v7yYw",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "team": "T0000000001",
+            "text": "프로젝트 저장소 링크 공유합니다 <https://github.com/hjo3736/slackattic|github.com/hjo3736/slackattic> *다음을 사용하여 보냄* Claude",
+            "ts": "1793344768.206189",
             "type": "message",
             "user": "U0000000002"
           }
@@ -2577,49 +2528,6 @@
             "app_id": "A0000000002",
             "blocks": [
               {
-                "block_id": "n8MnPm",
-                "elements": [
-                  {
-                    "elements": [
-                      {
-                        "text": "프로젝트 저장소 링크 공유합니다 ",
-                        "type": "text"
-                      },
-                      {
-                        "from_llm": true,
-                        "text": "github.com/hjo3736/slackattic",
-                        "truncated": true,
-                        "type": "link",
-                        "url": "https://github.com/hjo3736/slackattic"
-                      }
-                    ],
-                    "type": "rich_text_section"
-                  }
-                ],
-                "type": "rich_text"
-              },
-              {
-                "block_id": "v7yYw",
-                "elements": [
-                  {
-                    "text": "*다음을 사용하여 보냄* Claude",
-                    "type": "mrkdwn",
-                    "verbatim": false
-                  }
-                ],
-                "type": "context"
-              }
-            ],
-            "team": "T0000000001",
-            "text": "프로젝트 저장소 링크 공유합니다 <https://github.com/hjo3736/slackattic|github.com/hjo3736/slackattic> *다음을 사용하여 보냄* Claude",
-            "ts": "1793344768.206189",
-            "type": "message",
-            "user": "U0000000002"
-          },
-          {
-            "app_id": "A0000000002",
-            "blocks": [
-              {
                 "block_id": "EIYa+F",
                 "elements": [
                   {
@@ -2700,8 +2608,17 @@
                 "type": "context"
               }
             ],
+            "is_locked": false,
+            "latest_reply": "1793418753.515519",
+            "reply_count": 1,
+            "reply_users": [
+              "U0000000002"
+            ],
+            "reply_users_count": 1,
+            "subscribed": false,
             "team": "T0000000001",
             "text": "안녕하세요! 테스트 워크스페이스입니다 :wave: *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344750.472099",
             "ts": "1793344750.472099",
             "type": "message",
             "user": "U0000000002"
@@ -2731,7 +2648,7 @@
       "params": {
         "channel": "C0000000006",
         "limit": 5,
-        "oldest": "1793258390.785599"
+        "oldest": "1785645655.000000"
       },
       "response": {
         "channel_actions_count": 0,
@@ -2865,8 +2782,17 @@
                 "type": "context"
               }
             ],
+            "is_locked": false,
+            "latest_reply": "1793418753.515519",
+            "reply_count": 1,
+            "reply_users": [
+              "U0000000002"
+            ],
+            "reply_users_count": 1,
+            "subscribed": false,
             "team": "T0000000001",
             "text": "안녕하세요! 테스트 워크스페이스입니다 :wave: *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344750.472099",
             "ts": "1793344750.472099",
             "type": "message",
             "user": "U0000000002"
@@ -2888,7 +2814,7 @@
           }
         ],
         "ok": true,
-        "oldest": "1793258390.785599",
+        "oldest": "1785645655.000000",
         "pin_count": 0,
         "response_metadata": {
           "next_cursor": "cursor-10"
@@ -2910,48 +2836,12 @@
             "app_id": "A0000000002",
             "blocks": [
               {
-                "block_id": "/+3Fg1",
+                "block_id": "lhkjI",
                 "elements": [
                   {
                     "elements": [
                       {
-                        "text": "이 메시지는 나중에 삭제할 예정입니다",
-                        "type": "text"
-                      }
-                    ],
-                    "type": "rich_text_section"
-                  }
-                ],
-                "type": "rich_text"
-              },
-              {
-                "block_id": "UOdv7",
-                "elements": [
-                  {
-                    "text": "*다음을 사용하여 보냄* Claude",
-                    "type": "mrkdwn",
-                    "verbatim": false
-                  }
-                ],
-                "type": "context"
-              }
-            ],
-            "team": "T0000000001",
-            "text": "이 메시지는 나중에 삭제할 예정입니다 *다음을 사용하여 보냄* Claude",
-            "ts": "1793344790.785599",
-            "type": "message",
-            "user": "U0000000002"
-          },
-          {
-            "app_id": "A0000000002",
-            "blocks": [
-              {
-                "block_id": "YnZSCG",
-                "elements": [
-                  {
-                    "elements": [
-                      {
-                        "text": "이 메시지는 나중에 수정할 예정입니다 (수정 전)",
+                        "text": "이 메시지는 수정되었습니다 (수정 후)",
                         "type": "text"
                       }
                     ],
@@ -2972,8 +2862,12 @@
                 "type": "context"
               }
             ],
+            "edited": {
+              "ts": "1793418845.000000",
+              "user": "U0000000002"
+            },
             "team": "T0000000001",
-            "text": "이 메시지는 나중에 수정할 예정입니다 (수정 전) *다음을 사용하여 보냄* Claude",
+            "text": "이 메시지는 수정되었습니다 (수정 후) *다음을 사용하여 보냄* Claude",
             "ts": "1793344789.748419",
             "type": "message",
             "user": "U0000000002"
@@ -3103,6 +2997,66 @@
             "team": "T0000000001",
             "text": "설치 명령은 이렇게 하면 됩니다\n```uv sync\nuv run slackattic sync``` *다음을 사용하여 보냄* Claude",
             "ts": "1793344774.032809",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "zfKeya",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "여러 줄 메시지 테스트",
+                        "type": "text"
+                      },
+                      {
+                        "text": "\n",
+                        "type": "text"
+                      },
+                      {
+                        "text": "첫째 줄",
+                        "type": "text"
+                      },
+                      {
+                        "text": "\n",
+                        "type": "text"
+                      },
+                      {
+                        "text": "둘째 줄",
+                        "type": "text"
+                      },
+                      {
+                        "text": "\n",
+                        "type": "text"
+                      },
+                      {
+                        "text": "셋째 줄",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "d+sqP",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "team": "T0000000001",
+            "text": "여러 줄 메시지 테스트\n첫째 줄\n둘째 줄\n셋째 줄 *다음을 사용하여 보냄* Claude",
+            "ts": "1793344773.116469",
             "type": "message",
             "user": "U0000000002"
           }
@@ -3401,6 +3355,1532 @@
       }
     },
     {
+      "method": "conversations.replies",
+      "params": {
+        "channel": "C0000000002",
+        "limit": 5,
+        "ts": "1793344794.944329"
+      },
+      "response": {
+        "has_more": false,
+        "messages": [
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "UdM/i7",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "이번 주 회의 일정 정리합니다",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "u9M7j",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "is_locked": false,
+            "latest_reply": "1793418752.574069",
+            "reply_count": 4,
+            "reply_users": [
+              "U0000000002"
+            ],
+            "reply_users_count": 1,
+            "subscribed": false,
+            "team": "T0000000001",
+            "text": "이번 주 회의 일정 정리합니다 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344794.944329",
+            "ts": "1793344794.944329",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "RKfL+w",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "회의를 목요일로 옮기면 어떨까요?",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "12rQA",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "회의를 목요일로 옮기면 어떨까요? *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344794.944329",
+            "ts": "1793344805.666089",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "OTtFsU",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "목요일 좋아요. 회의실은 제가 잡을게요",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "Xx/ON",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "목요일 좋아요. 회의실은 제가 잡을게요 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344794.944329",
+            "ts": "1793344806.684629",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "U1wCXU",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "회의실 예약 완료했습니다 ",
+                        "type": "text"
+                      },
+                      {
+                        "name": "white_check_mark",
+                        "type": "emoji",
+                        "unicode": "2705"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "bR93h",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "회의실 예약 완료했습니다 :white_check_mark: *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344794.944329",
+            "ts": "1793344807.840199",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "koQoTt",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "하루 지나서 단 답글입니다",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "hS4yy",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "하루 지나서 단 답글입니다 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344794.944329",
+            "ts": "1793418752.574069",
+            "type": "message",
+            "user": "U0000000002"
+          }
+        ],
+        "ok": true
+      }
+    },
+    {
+      "method": "conversations.replies",
+      "params": {
+        "channel": "C0000000002",
+        "limit": 5,
+        "ts": "1793344808.869439"
+      },
+      "response": {
+        "has_more": false,
+        "messages": [
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "VQoeqI",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "지난주 회의록 올립니다",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  },
+                  {
+                    "elements": [
+                      {
+                        "elements": [
+                          {
+                            "text": "1주차 범위 확정",
+                            "type": "text"
+                          }
+                        ],
+                        "type": "rich_text_section"
+                      },
+                      {
+                        "elements": [
+                          {
+                            "text": "테스트 워크스페이스 준비",
+                            "type": "text"
+                          }
+                        ],
+                        "type": "rich_text_section"
+                      },
+                      {
+                        "elements": [
+                          {
+                            "text": "다음 회의는 목요일",
+                            "type": "text"
+                          }
+                        ],
+                        "type": "rich_text_section"
+                      }
+                    ],
+                    "indent": 0,
+                    "style": "ordered",
+                    "type": "rich_text_list"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "n6n3r",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "is_locked": false,
+            "latest_reply": "1793344829.371029",
+            "reply_count": 1,
+            "reply_users": [
+              "U0000000002"
+            ],
+            "reply_users_count": 1,
+            "subscribed": false,
+            "team": "T0000000001",
+            "text": "지난주 회의록 올립니다\n1. 1주차 범위 확정\n2. 테스트 워크스페이스 준비\n3. 다음 회의는 목요일 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344808.869439",
+            "ts": "1793344808.869439",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "UKXZ9z",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "회의록 감사합니다!",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "S7vEt",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "회의록 감사합니다! *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344808.869439",
+            "ts": "1793344829.371029",
+            "type": "message",
+            "user": "U0000000002"
+          }
+        ],
+        "ok": true
+      }
+    },
+    {
+      "method": "conversations.replies",
+      "params": {
+        "channel": "C0000000002",
+        "limit": 5,
+        "ts": "1793344809.828999"
+      },
+      "response": {
+        "has_more": false,
+        "messages": [
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "8o/mJj",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "다음주회의 안건 있으면 스레드에 남겨주세요",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "gernE",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "is_locked": false,
+            "latest_reply": "1793344831.324209",
+            "reply_count": 2,
+            "reply_users": [
+              "U0000000002"
+            ],
+            "reply_users_count": 1,
+            "subscribed": false,
+            "team": "T0000000001",
+            "text": "다음주회의 안건 있으면 스레드에 남겨주세요 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344809.828999",
+            "ts": "1793344809.828999",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "t8QC2s",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "검색 기능 데모 보고 싶어요",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "a9pPz",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "검색 기능 데모 보고 싶어요 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344809.828999",
+            "ts": "1793344830.316379",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "5YmbGY",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "스터디 자료 공유 방식도 정했으면 합니다",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "j3EjN",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "스터디 자료 공유 방식도 정했으면 합니다 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344809.828999",
+            "ts": "1793344831.324209",
+            "type": "message",
+            "user": "U0000000002"
+          }
+        ],
+        "ok": true
+      }
+    },
+    {
+      "method": "conversations.replies",
+      "params": {
+        "channel": "C0000000002",
+        "limit": 5,
+        "ts": "1793344810.826979"
+      },
+      "response": {
+        "has_more": false,
+        "messages": [
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "5zN0+/",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "스터디 3회차 발표자료 공유합니다",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "/VFwU",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "is_locked": false,
+            "latest_reply": "1793344833.368469",
+            "reply_count": 2,
+            "reply_users": [
+              "U0000000002"
+            ],
+            "reply_users_count": 1,
+            "subscribed": false,
+            "team": "T0000000001",
+            "text": "스터디 3회차 발표자료 공유합니다 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344810.826979",
+            "ts": "1793344810.826979",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "BRQdRE",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "발표 자료 잘 봤습니다",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "G8jI9",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "발표 자료 잘 봤습니다 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344810.826979",
+            "ts": "1793344832.440539",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "cw/A75",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "발표자료 PDF 버전도 있을까요?",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "kT3fO",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "발표자료 PDF 버전도 있을까요? *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344810.826979",
+            "ts": "1793344833.368469",
+            "type": "message",
+            "user": "U0000000002"
+          }
+        ],
+        "ok": true
+      }
+    },
+    {
+      "method": "conversations.replies",
+      "params": {
+        "channel": "C0000000002",
+        "limit": 5,
+        "ts": "1793344811.878879"
+      },
+      "response": {
+        "has_more": false,
+        "messages": [
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "lzXQ3n",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "질문 있습니다. 스레드 답글이 많으면 어떻게 보이나요?",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "OMO6t",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "is_locked": false,
+            "latest_reply": "1793344836.213679",
+            "reply_count": 3,
+            "reply_users": [
+              "U0000000002"
+            ],
+            "reply_users_count": 1,
+            "subscribed": false,
+            "team": "T0000000001",
+            "text": "질문 있습니다. 스레드 답글이 많으면 어떻게 보이나요? *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344811.878879",
+            "ts": "1793344811.878879",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "3NTEKG",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "답글 1",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "90/7C",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "답글 1 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344811.878879",
+            "ts": "1793344834.276139",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "GJpM4t",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "답글 2",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "Gbt4R",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "답글 2 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344811.878879",
+            "ts": "1793344835.231039",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "UmHHp2",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "답글 3",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "dIJc9",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "답글 3 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344811.878879",
+            "ts": "1793344836.213679",
+            "type": "message",
+            "user": "U0000000002"
+          }
+        ],
+        "ok": true
+      }
+    },
+    {
+      "method": "conversations.replies",
+      "params": {
+        "channel": "C0000000004",
+        "limit": 5,
+        "ts": "1793344854.753159"
+      },
+      "response": {
+        "has_more": false,
+        "messages": [
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "P2j3j7",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "type": "user",
+                        "user_id": "U0000000002"
+                      },
+                      {
+                        "text": " 다음 달 회비 정리 부탁드립니다",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "6jG5q",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "is_locked": false,
+            "latest_reply": "1793344871.333679",
+            "reply_count": 1,
+            "reply_users": [
+              "U0000000002"
+            ],
+            "reply_users_count": 1,
+            "subscribed": false,
+            "team": "T0000000001",
+            "text": "<@U0000000002> 다음 달 회비 정리 부탁드립니다 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344854.753159",
+            "ts": "1793344854.753159",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "KqZUgt",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "이번 주 안에 정리할게요",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "w50q/",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "이번 주 안에 정리할게요 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344854.753159",
+            "ts": "1793344871.333679",
+            "type": "message",
+            "user": "U0000000002"
+          }
+        ],
+        "ok": true
+      }
+    },
+    {
+      "method": "conversations.replies",
+      "params": {
+        "channel": "C0000000004",
+        "limit": 5,
+        "ts": "1793344857.413309"
+      },
+      "response": {
+        "has_more": false,
+        "messages": [
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "dj/zqd",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "신규 멤버 초대 링크는 여기에만 공유합니다",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "X+bUU",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "is_locked": false,
+            "latest_reply": "1793344872.281669",
+            "reply_count": 1,
+            "reply_users": [
+              "U0000000002"
+            ],
+            "reply_users_count": 1,
+            "subscribed": false,
+            "team": "T0000000001",
+            "text": "신규 멤버 초대 링크는 여기에만 공유합니다 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344857.413309",
+            "ts": "1793344857.413309",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "ZgBqxR",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "공개 채널에는 올리지 말아주세요",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "DsDSl",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "공개 채널에는 올리지 말아주세요 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344857.413309",
+            "ts": "1793344872.281669",
+            "type": "message",
+            "user": "U0000000002"
+          }
+        ],
+        "ok": true
+      }
+    },
+    {
+      "method": "conversations.replies",
+      "params": {
+        "channel": "C0000000004",
+        "limit": 5,
+        "ts": "1793344860.543159"
+      },
+      "response": {
+        "has_more": false,
+        "messages": [
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "K26gYL",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "channel_id": "C0000000006",
+                        "type": "channel"
+                      },
+                      {
+                        "text": " 에 공지 올렸습니다",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "YVbDA",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "is_locked": false,
+            "latest_reply": "1793344873.200729",
+            "reply_count": 1,
+            "reply_users": [
+              "U0000000002"
+            ],
+            "reply_users_count": 1,
+            "subscribed": false,
+            "team": "T0000000001",
+            "text": "<#C0000000006> 에 공지 올렸습니다 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344860.543159",
+            "ts": "1793344860.543159",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "U72fK2",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "확인했습니다 ",
+                        "type": "text"
+                      },
+                      {
+                        "name": "ok_hand",
+                        "type": "emoji",
+                        "unicode": "1f44c"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "jB6Vr",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "확인했습니다 :ok_hand: *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344860.543159",
+            "ts": "1793344873.200729",
+            "type": "message",
+            "user": "U0000000002"
+          }
+        ],
+        "ok": true
+      }
+    },
+    {
+      "method": "conversations.replies",
+      "params": {
+        "channel": "C0000000006",
+        "limit": 5,
+        "ts": "1793344750.472099"
+      },
+      "response": {
+        "has_more": false,
+        "messages": [
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "38A0pZ",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "안녕하세요! 테스트 워크스페이스입니다 ",
+                        "type": "text"
+                      },
+                      {
+                        "name": "wave",
+                        "type": "emoji",
+                        "unicode": "1f44b"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "mmT6o",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "is_locked": false,
+            "latest_reply": "1793418753.515519",
+            "reply_count": 1,
+            "reply_users": [
+              "U0000000002"
+            ],
+            "reply_users_count": 1,
+            "subscribed": false,
+            "team": "T0000000001",
+            "text": "안녕하세요! 테스트 워크스페이스입니다 :wave: *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344750.472099",
+            "ts": "1793344750.472099",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "sRisA1",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "원래 답글이 없던 글에 단 첫 답글",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "zd5hw",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "원래 답글이 없던 글에 단 첫 답글 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344750.472099",
+            "ts": "1793418753.515519",
+            "type": "message",
+            "user": "U0000000002"
+          }
+        ],
+        "ok": true
+      }
+    },
+    {
+      "method": "conversations.replies",
+      "params": {
+        "channel": "C0000000006",
+        "limit": 5,
+        "ts": "1793344754.337379"
+      },
+      "response": {
+        "has_more": false,
+        "messages": [
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "EIYa+F",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "type": "user",
+                        "user_id": "U0000000002"
+                      },
+                      {
+                        "text": " 오늘 저녁 7시에 모일 수 있나요?",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "wPMkU",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "is_locked": false,
+            "latest_reply": "1793344767.034079",
+            "reply_count": 2,
+            "reply_users": [
+              "U0000000002"
+            ],
+            "reply_users_count": 1,
+            "subscribed": false,
+            "team": "T0000000001",
+            "text": "<@U0000000002> 오늘 저녁 7시에 모일 수 있나요? *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344754.337379",
+            "ts": "1793344754.337379",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "8B+DHA",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "네 가능합니다 ",
+                        "type": "text"
+                      },
+                      {
+                        "name": "+1",
+                        "type": "emoji",
+                        "unicode": "1f44d"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "RGGHE",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "네 가능합니다 :+1: *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344754.337379",
+            "ts": "1793344766.069859",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "9bUh9S",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "장소는 ",
+                        "type": "text"
+                      },
+                      {
+                        "channel_id": "C0000000002",
+                        "type": "channel"
+                      },
+                      {
+                        "text": " 에 올려둘게요",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "jyyUH",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "장소는 <#C0000000002> 에 올려둘게요 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344754.337379",
+            "ts": "1793344767.034079",
+            "type": "message",
+            "user": "U0000000002"
+          }
+        ],
+        "ok": true
+      }
+    },
+    {
+      "method": "conversations.replies",
+      "params": {
+        "channel": "C0000000006",
+        "limit": 5,
+        "ts": "1793344775.131899"
+      },
+      "response": {
+        "has_more": false,
+        "messages": [
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "DLLO9y",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "2026-11-02 월요일 일정 공유드립니다",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "PyLJe",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "is_locked": false,
+            "latest_reply": "1793344787.531549",
+            "reply_count": 3,
+            "reply_users": [
+              "U0000000002"
+            ],
+            "reply_users_count": 1,
+            "subscribed": false,
+            "team": "T0000000001",
+            "text": "2026-11-02 월요일 일정 공유드립니다 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344775.131899",
+            "ts": "1793344775.131899",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "DlwsQB",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "확인했습니다",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "RPnhQ",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "확인했습니다 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344775.131899",
+            "ts": "1793344785.422399",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "wr+mgm",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "저도요 ",
+                        "type": "text"
+                      },
+                      {
+                        "name": "eyes",
+                        "type": "emoji",
+                        "unicode": "1f440"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "tTgjG",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "저도요 :eyes: *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344775.131899",
+            "ts": "1793344786.458269",
+            "type": "message",
+            "user": "U0000000002"
+          },
+          {
+            "app_id": "A0000000002",
+            "blocks": [
+              {
+                "block_id": "/gMcDN",
+                "elements": [
+                  {
+                    "elements": [
+                      {
+                        "text": "시간 바뀌면 다시 알려주세요",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "rich_text_section"
+                  }
+                ],
+                "type": "rich_text"
+              },
+              {
+                "block_id": "vr/ZK",
+                "elements": [
+                  {
+                    "text": "*다음을 사용하여 보냄* Claude",
+                    "type": "mrkdwn",
+                    "verbatim": false
+                  }
+                ],
+                "type": "context"
+              }
+            ],
+            "parent_user_id": "U0000000002",
+            "team": "T0000000001",
+            "text": "시간 바뀌면 다시 알려주세요 *다음을 사용하여 보냄* Claude",
+            "thread_ts": "1793344775.131899",
+            "ts": "1793344787.531549",
+            "type": "message",
+            "user": "U0000000002"
+          }
+        ],
+        "ok": true
+      }
+    },
+    {
       "method": "users.list",
       "params": {
         "limit": 5
@@ -3555,6 +5035,8 @@
       }
     }
   ],
+  "now": 1793421655,
   "page_size": 5,
+  "rescan_days": 90,
   "version": 1
 }

@@ -14,6 +14,7 @@ from slackattic.slack.errors import (
     SlackAuthError,
     SlackChannelError,
     SlackError,
+    SlackThreadError,
     SlackTransientError,
 )
 
@@ -36,6 +37,8 @@ AUTH_ERRORS = frozenset(
     }
 )
 CHANNEL_ERRORS = frozenset({"not_in_channel", "channel_not_found", "is_archived"})
+# A deleted thread root can make its replies unreachable; only that thread is skipped
+THREAD_ERRORS = frozenset({"thread_not_found"})
 TRANSIENT_ERRORS = frozenset(
     {"ratelimited", "internal_error", "fatal_error", "service_unavailable", "request_timeout"}
 )
@@ -73,7 +76,7 @@ class SlackClient:
         try:
             response = self._web.api_call(method, http_verb="GET", params=params)
         except SlackApiError as e:
-            raise _classify(method, e, params.get("channel")) from None
+            raise _classify(method, e, params.get("channel"), params.get("ts")) from None
         except (OSError, http.client.HTTPException) as e:
             # URLError, timeouts and dropped connections all land here after retries
             raise SlackTransientError(
@@ -114,8 +117,14 @@ class SlackClient:
     def iter_history(self, channel: str, oldest: str | None = None) -> Iterator[dict[str, Any]]:
         return self.paginate("conversations.history", "messages", channel=channel, oldest=oldest)
 
+    def iter_replies(self, channel: str, thread_ts: str) -> Iterator[dict[str, Any]]:
+        # The first item is the thread root itself
+        return self.paginate("conversations.replies", "messages", channel=channel, ts=thread_ts)
 
-def _classify(method: str, error: SlackApiError, channel: str | None) -> SlackError:
+
+def _classify(
+    method: str, error: SlackApiError, channel: str | None, thread_ts: str | None = None
+) -> SlackError:
     response: Mapping[str, Any] = error.response or {}
     code = str(response.get("error") or "unknown_error")
     status = getattr(error.response, "status_code", None)
@@ -125,6 +134,13 @@ def _classify(method: str, error: SlackApiError, channel: str | None) -> SlackEr
         if code == "missing_scope" and response.get("needed"):
             detail = f" (needed: {response['needed']}; update the app and reinstall it)"
         return SlackAuthError(f"{method}: {code}{detail}", code)
+    if code in THREAD_ERRORS and channel and thread_ts:
+        return SlackThreadError(
+            f"{method}: {code} for thread {thread_ts} in channel {channel}",
+            code,
+            channel,
+            thread_ts,
+        )
     if code in CHANNEL_ERRORS and channel:
         return SlackChannelError(f"{method}: {code} in channel {channel}", code, channel)
     if code in TRANSIENT_ERRORS or status == 429 or (status is not None and status >= 500):

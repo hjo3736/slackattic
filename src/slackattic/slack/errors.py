@@ -21,5 +21,14 @@ class SlackChannelError(SlackError):
         self.channel = channel
 
 
+class SlackThreadError(SlackError):
+    """Problem limited to one thread; the run can skip it and retry it next time."""
+
+    def __init__(self, message: str, code: str, channel: str, thread_ts: str) -> None:
+        super().__init__(message, code)
+        self.channel = channel
+        self.thread_ts = thread_ts
+
+
 class SlackTransientError(SlackError):
     """Network, server or rate limit failure left after retries."""

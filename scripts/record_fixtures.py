@@ -10,6 +10,7 @@ import json
 import re
 import sys
 import tempfile
+import time
 from collections.abc import Iterator
 from pathlib import Path
 from typing import Any
@@ -174,7 +175,7 @@ def interaction_key(method: str, params: dict[str, Any]) -> str:
     return method + " " + json.dumps(params, ensure_ascii=False, sort_keys=True)
 
 
-def record(token: str, base_config: Any) -> list[dict[str, Any]]:
+def record(token: str, base_config: Any, now: int) -> list[dict[str, Any]]:
     recorder = RecordingWeb(WebClient(token=token, timeout=REQUEST_TIMEOUT_SECONDS))
     client = SlackClient(token, web_client=recorder, page_size=PAGE_SIZE)
     client.auth_test()
@@ -183,7 +184,9 @@ def record(token: str, base_config: Any) -> list[dict[str, Any]]:
         # Two runs cover both the first fetch and the incremental fetch with oldest set
         for _ in range(2):
             meta = sync_metadata(client, config)
-            result = sync_messages(client, config.archive_dir, [c["id"] for c in meta.selected])
+            ids = [c["id"] for c in meta.selected]
+            # A fixed clock keeps the rescan window, and so the recorded requests, replayable
+            result = sync_messages(client, config.archive_dir, ids, config.rescan_days, now)
             if result.skipped:
                 raise SlackatticError(f"{len(result.skipped)} channel(s) were skipped")
     return recorder.interactions
@@ -217,12 +220,13 @@ def _subdomain(url: str | None) -> str | None:
 
 def channel_summary(interactions: list[dict[str, Any]]) -> Iterator[str]:
     for item in interactions:
-        if item["method"] == "conversations.history":
+        if item["method"] in ("conversations.history", "conversations.replies"):
             p = item["params"]
             count = len(item["response"].get("messages", []))
             page = "next page" if p.get("cursor") else "first page"
             since = f", oldest {p['oldest']}" if p.get("oldest") else ""
-            yield f"{p['channel']}: {count} message(s), {page}{since}"
+            thread = f", thread {p['ts']}" if p.get("ts") else ""
+            yield f"{p['channel']}: {count} message(s), {page}{since}{thread}"
 
 
 def main() -> int:
@@ -231,8 +235,15 @@ def main() -> int:
     args = parser.parse_args()
     try:
         config = load_config()
-        interactions = anonymize(record(config.token, config))
-        payload = {"interactions": interactions, "page_size": PAGE_SIZE, "version": FIXTURE_VERSION}
+        now = int(time.time())
+        interactions = anonymize(record(config.token, config, now))
+        payload = {
+            "interactions": interactions,
+            "now": now,
+            "page_size": PAGE_SIZE,
+            "rescan_days": config.rescan_days,
+            "version": FIXTURE_VERSION,
+        }
         changed = write_text_if_changed(args.output, dump_json(payload))
     except (SlackatticError, LeakError) as e:
         print(f"error: {e}", file=sys.stderr)

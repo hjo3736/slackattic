@@ -22,6 +22,9 @@ class ReplayWeb:
     def __init__(self, path: Path = WORKSPACE_FIXTURE) -> None:
         payload = json.loads(path.read_text(encoding="utf-8"))
         self.page_size: int = payload["page_size"]
+        # The clock and window used while recording, so requests match exactly
+        self.now: int = payload["now"]
+        self.rescan_days: int = payload["rescan_days"]
         self.retry_handlers: list[Any] = []
         self.calls: list[tuple[str, dict[str, Any]]] = []
         self._responses = {

@@ -18,7 +18,9 @@ TOKEN_ENV = "SLACK_BOT_TOKEN"
 BOT_TOKEN_PREFIX = "xoxb-"
 DEFAULT_CONFIG_PATH = Path("slackattic.toml")
 DEFAULT_ARCHIVE_DIR = Path("archive")
-_ALLOWED_KEYS = frozenset({"archive_dir", "channels", "fields"})
+_ALLOWED_KEYS = frozenset({"archive_dir", "channels", "fields", "rescan_days"})
+# Free workspaces only show the last 90 days, so this covers everything that can still change
+DEFAULT_RESCAN_DAYS = 90
 _FIELD_GROUPS = {
     "channels": (CHANNEL_REQUIRED, CHANNEL_OPTIONAL, DEFAULT_CHANNEL_FIELDS),
     "users": (USER_REQUIRED, USER_OPTIONAL, DEFAULT_USER_FIELDS),
@@ -34,6 +36,8 @@ class Config:
     channels: tuple[str, ...] = ()
     channel_fields: tuple[str, ...] = DEFAULT_CHANNEL_FIELDS
     user_fields: tuple[str, ...] = DEFAULT_USER_FIELDS
+    # Days of history re-read each run to catch new replies, edits and deletions
+    rescan_days: int = DEFAULT_RESCAN_DAYS
 
 
 def load_config(path: Path | None = None, env: Mapping[str, str] | None = None) -> Config:
@@ -51,6 +55,7 @@ def load_config(path: Path | None = None, env: Mapping[str, str] | None = None) 
         channels=_read_channels(data),
         channel_fields=fields["channels"],
         user_fields=fields["users"],
+        rescan_days=_read_rescan_days(data),
     )
 
 
@@ -133,3 +138,11 @@ def _read_field_list(group: str, table: Mapping[str, object]) -> tuple[str, ...]
             raise ConfigError(f"fields.{group}: unknown field '{name}' (choose from: {choices})")
     # Keep the first occurrence so duplicates do not change the output
     return tuple(dict.fromkeys(value))
+
+
+def _read_rescan_days(data: Mapping[str, object]) -> int:
+    value = data.get("rescan_days", DEFAULT_RESCAN_DAYS)
+    # bool is an int subclass, so true/false must be rejected explicitly
+    if isinstance(value, bool) or not isinstance(value, int) or value < 1:
+        raise ConfigError("rescan_days must be a whole number of days, 1 or more (default 90)")
+    return value
